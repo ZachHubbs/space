@@ -92,10 +92,11 @@ document.getElementById("buy_multiplier").onclick =    function() {
    multiplier++;
    document.getElementById("buy_multiplier").disabled = true;
    //miners = miners * multiplier;
-   update_total_clicks();
+   
    update_cps();
    total_clicks -= 50;
    upgrades += "Titanium Drill Bit";
+   update_total_clicks();
    update_upgrades();
 
 };
