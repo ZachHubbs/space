@@ -19,6 +19,7 @@
 <div id="total_clicks">Clicks: 0</div>
 <div id="clicks_per_second">Clicks per second: 0</div>
 <div id="current_multiplier">Multiplier: 1</div>
+</br>
 <div id="total_mining_barges">Mining Barges: 0</div>
 <div id="bought_upgrades">Upgrades: </div>
 
@@ -76,7 +77,7 @@ document.getElementById("buy_mining_barge").onclick =    function() {
 	var e3 = document.getElementById("total_mining_barges");
 	e3.innerHTML = "Mining barges: " + miners;
 	
-  //  update_total_clicks();
+    update_total_clicks();
 	update_cps();
 };
 
@@ -91,6 +92,7 @@ document.getElementById("buy_multiplier").onclick =    function() {
    multiplier++;
    document.getElementById("buy_multiplier").disabled = true;
    //miners = miners * multiplier;
+   update_total_clicks();
    update_cps();
    total_clicks -= 50;
    upgrades += "Titanium Drill Bit";
