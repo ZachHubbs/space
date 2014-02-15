@@ -52,6 +52,7 @@ document.getElementById("buy_multiplier").onclick =    function() {
    multiplier = .5; // Multiplier must be a percentage to work properly
    var i = document.getElementById("current_multiplier");
    i.innerHTML = 'Multiplier ' + multiplier;
+   document.getElementById("buy_multiplier").disabled = true;
 };
 
 setInterval(function () {
