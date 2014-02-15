@@ -13,12 +13,15 @@
 
 <button id="click">click me!</button>
 <button id="buy_click">Buy an autoclick for 1</button>
+<button id="buy_multiplier">Increase all clicks by 50%</button>
 <div id="total_clicks">Clicks: 0</div>
 <div id="clicks_per_second">Clicks per second: 0</div>
+<div id="current_multiplier">Multiplier: 0</div>
 <script>
 var clicks = 0; //increment this by one every click
 var auto_clicks = 0; //automatically click once per second
 var cost = 1; //the cost of this should increase exponentially
+var multiplier=0; // increases based on upgrades
 
 
 function update_total_clicks() {
@@ -27,7 +30,8 @@ function update_total_clicks() {
 }
 
 document.getElementById("click").onclick =    function() {  
-    clicks++; 
+
+	clicks =  multiplier * 1 + clicks + 1;
     update_total_clicks(); //updates the text
 };
 document.getElementById("buy_click").onclick =    function() {  
@@ -43,9 +47,15 @@ document.getElementById("buy_click").onclick =    function() {
     e2.innerHTML = 'Buy an autoclick for ' + cost;
     update_total_clicks();
 };
+document.getElementById("buy_multiplier").onclick =    function() {  
+   multiplier = .5; // Multiplier must be a percentage to work properly
+   var i = document.getElementById("current_multiplier");
+   i.innerHTML = 'Multiplier ' + multiplier;
+};
 
-setInterval(function () { 
-    clicks += auto_clicks;
+setInterval(function () {
+    clicks += multiplier * auto_clicks + auto_clicks;
+	
     update_total_clicks(); 
 }, 1000); //once per second use the auto clickers
 </script>
