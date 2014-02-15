@@ -10,55 +10,78 @@
 </head>
 
 <body>
-
-<button id="click2">click me!</button>
-<button id="buy_click">Buy an autoclick for 1</button>
-<button id="buy_multiplier">Increase all clicks by 50%</button>
 <a id="click"><img id="click" src="images/asteroid.png"></a>
+</br>
+<button id="buy_mining_barge">Buy a mining barge for 1</button>
+</br>
+<button id="buy_multiplier" title="Doubles the value of mining barges and manual clicks">Titanium Drill Bit</button>
+
 <div id="total_clicks">Clicks: 0</div>
 <div id="clicks_per_second">Clicks per second: 0</div>
 <div id="current_multiplier">Multiplier: 0</div>
+<div id="total_mining_barges">Mining Barges: 0</div>
+
 <script>
 var clicks = 0; //increment this by one every click
-var auto_clicks = 0; //automatically click once per second
+var auto_clicks = 0 ; //automatically click once per second
 var cost = 1; //the cost of this should increase exponentially
 var multiplier=0; // increases based on upgrades
 
-
+//update the total number of clicks
 function update_total_clicks() {
     var e = document.getElementById("total_clicks");
     e.innerHTML = 'Clicks: ' + clicks;
 }
 
+//update the amount of clicks per second
+function update_cps()  {
+	var e = document.getElementById("clicks_per_second");
+	e.innerHTML = 'Clicks per second: ' + auto_clicks;
+}
+
+//add a click when the asteroid is manually clicked
 document.getElementById("click").onclick =    function() {  
 
 	clicks =  multiplier * 1 + clicks + 1;
     update_total_clicks(); //updates the text
 };
-document.getElementById("buy_click").onclick =    function() {  
+
+//purchases 1 mining barge and updates all number fields accordingly while increasing cost of each
+//additional barge exponentially
+document.getElementById("buy_mining_barge").onclick =    function() {  
     if (clicks < cost) {
         return alert('need more clicks.');
     }
     auto_clicks++; 
     clicks -= cost;
-    cost = Math.pow(2, auto_clicks);  
+    cost = Math.pow(2, auto_clicks); 
     var e = document.getElementById("clicks_per_second");
     e.innerHTML = 'Clicks per second: ' + auto_clicks; 
-    var e2 = document.getElementById("buy_click");
-    e2.innerHTML = 'Buy an autoclick for ' + cost;
+    var e2 = document.getElementById("buy_mining_barge");
+    e2.innerHTML = 'Buy a mining barge for ' + cost;
+	var e3 = document.getElementById("total_mining_barges");
+	e3.innerHTML = "Mining barges: " + auto_clicks;
     update_total_clicks();
-};
-document.getElementById("buy_multiplier").onclick =    function() {  
-   multiplier = .5; // Multiplier must be a percentage to work properly
-   var i = document.getElementById("current_multiplier");
-   i.innerHTML = 'Multiplier ' + multiplier;
-   document.getElementById("buy_multiplier").disabled = true;
+	update_cps();
 };
 
+//purchases the click multiplier, disabling the button
+document.getElementById("buy_multiplier").onclick =    function() {  
+   multiplier = 1; // Multiplier must be a percentage to work properly
+   var i = document.getElementById("current_multiplier");
+   i.innerHTML = 'Multiplier: ' + multiplier * 2;
+   document.getElementById("buy_multiplier").disabled = true;
+   auto_clicks = auto_clicks * multiplier + 1;
+   update_cps();
+};
+
+//updates text fields once per second
 setInterval(function () {
     clicks += multiplier * auto_clicks + auto_clicks;
+
 	
     update_total_clicks(); 
+	update_cps();
 }, 1000); //once per second use the auto clickers
 </script>
 
