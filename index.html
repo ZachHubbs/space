@@ -14,18 +14,20 @@
 </br>
 <button id="buy_mining_barge">Buy a mining barge for 1</button>
 </br>
-<button id="buy_multiplier" title="Doubles the value of mining barges and manual clicks">Titanium Drill Bit</button>
+<button id="buy_multiplier" title="Doubles the value of mining barges and manual clicks">Titanium Drill Bit - 50</button>
 
 <div id="total_clicks">Clicks: 0</div>
 <div id="clicks_per_second">Clicks per second: 0</div>
-<div id="current_multiplier">Multiplier: 0</div>
+<div id="current_multiplier">Multiplier: 1</div>
 <div id="total_mining_barges">Mining Barges: 0</div>
+<div id="bought_upgrades">Upgrades: </div>
 
 <script>
 var clicks = 0; //increment this by one every click
 var auto_clicks = 0 ; //automatically click once per second
 var cost = 1; //the cost of this should increase exponentially
 var multiplier=0; // increases based on upgrades
+var upgrades = "Upgrades: ";
 
 //update the total number of clicks
 function update_total_clicks() {
@@ -36,7 +38,13 @@ function update_total_clicks() {
 //update the amount of clicks per second
 function update_cps()  {
 	var e = document.getElementById("clicks_per_second");
-	e.innerHTML = 'Clicks per second: ' + auto_clicks;
+	e.innerHTML = 'Clicks per second: ' + auto_clicks * multiplier;
+}
+
+//update the bought upgrades
+function update_upgrades() 	{
+	var e = document.getElementById("bought_upgrades");
+	e.innerHTML = upgrades;
 }
 
 //add a click when the asteroid is manually clicked
@@ -61,18 +69,27 @@ document.getElementById("buy_mining_barge").onclick =    function() {
     e2.innerHTML = 'Buy a mining barge for ' + cost;
 	var e3 = document.getElementById("total_mining_barges");
 	e3.innerHTML = "Mining barges: " + auto_clicks;
+	
     update_total_clicks();
 	update_cps();
 };
 
 //purchases the click multiplier, disabling the button
 document.getElementById("buy_multiplier").onclick =    function() {  
+	if (clicks < 50) {
+		return alert('need more clicks.');
+	}	
+		
    multiplier = 1; // Multiplier must be a percentage to work properly
-   var i = document.getElementById("current_multiplier");
-   i.innerHTML = 'Multiplier: ' + multiplier * 2;
+   var e = document.getElementById("current_multiplier");
+   e.innerHTML = 'Multiplier: ' + multiplier * 2;
    document.getElementById("buy_multiplier").disabled = true;
-   auto_clicks = auto_clicks * multiplier + 1;
+   auto_clicks = auto_clicks * multiplier;
    update_cps();
+   clicks -= 50;
+   upgrades += "Titanium Drill Bit";
+   update_upgrades();
+
 };
 
 //updates text fields once per second
