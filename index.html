@@ -12,7 +12,9 @@
 <body>
 <a><img id="click" src="images/asteroid.png"></a>
 </br>
-<button id="buy_mining_barge">Buy a mining barge for 1</button>
+<button id="buy_space_miner" title="Mines 0.1 metal per second">Hire a space miner for 15</button>
+</br>
+<button id="buy_mining_barge" title="Mines 1.0 metal per second">Buy a mining barge for 100</button>
 </br>
 <button id="buy_multiplier" title="Doubles the value of mining barges and manual clicks">Titanium Drill Bit - 50</button>
 
@@ -20,6 +22,7 @@
 <div id="clicks_per_second">Clicks per second: 0</div>
 <div id="current_multiplier">Multiplier: 1</div>
 </br>
+<div id="total_space_miners">Space Miners: 0</div>
 <div id="total_mining_barges">Mining Barges: 0</div>
 <div id="bought_upgrades">Upgrades: </div>
 
@@ -31,21 +34,27 @@ var multiplier = 1; // increases based on upgrades
 var cps = 0; //the number of total clicks per second 
 var upgrades = "Upgrades: ";  //purchased upgrades
 
+//Space Miner Variables
+var space_miner = 0; //the number of space miners hired
+var space_miner_cost = 15; //the cost of hiring a space miner.  Increases exponentially
+
 //Mining Barge Variables
-var miners = 0; //the number of mining barges purchased
-var miner_cost = 1; //the cost of this should increase exponentially
+var mining_barge = 0; //the number of mining barges purchased
+var mining_barge_cost = 100; //the cost of this should increase exponentially
 
 
 //update the total number of clicks
 function update_total_clicks() {
     var e = document.getElementById("total_clicks");
-    e.innerHTML = 'Clicks: ' + total_clicks;
+    e.innerHTML = 'Clicks: ' + Math.round(total_clicks * 10)/10;
 }
 
 //update the amount of clicks per second
 function update_cps()  {
+	cps = ((space_miner / 10) + mining_barge) * multiplier;
 	var e = document.getElementById("clicks_per_second");
-	e.innerHTML = 'Clicks per second: ' + miners * multiplier;
+	e.innerHTML = 'Clicks per second: ' + cps;
+	
 }
 
 //update the bought upgrades
@@ -61,21 +70,37 @@ document.getElementById("click").onclick =    function() {
     update_total_clicks(); //updates the text
 };
 
+//purchases 1 space miner and updates all number fields accordingly while increasing cost of each
+//additional miner exponentially
+document.getElementById("buy_space_miner").onclick =    function() {  
+    if (total_clicks < space_miner_cost) {
+        return alert('need more clicks.');
+    }
+    space_miner++; 
+    total_clicks -= space_miner_cost;
+	space_miner_cost = Math.round(space_miner_cost * 1.15);
+    var e2 = document.getElementById("buy_space_miner");
+    e2.innerHTML = 'Hire a space miner for ' + space_miner_cost;
+	var e3 = document.getElementById("total_space_miners");
+	e3.innerHTML = "Space Miners: " + space_miner;
+	
+    update_total_clicks();
+	update_cps();
+};
+
 //purchases 1 mining barge and updates all number fields accordingly while increasing cost of each
 //additional barge exponentially
 document.getElementById("buy_mining_barge").onclick =    function() {  
-    if (total_clicks < miner_cost) {
+    if (total_clicks < mining_barge_cost) {
         return alert('need more clicks.');
     }
-    miners++; 
-    total_clicks -= miner_cost;
-    miner_cost = Math.pow(2, miners); 
-    var e = document.getElementById("clicks_per_second");
-    e.innerHTML = 'Clicks per second: ' + miners; 
+    mining_barge++; 
+    total_clicks -= mining_barge_cost;
+    mining_barge_cost = Math.round(mining_barge_cost * 1.15);  
     var e2 = document.getElementById("buy_mining_barge");
-    e2.innerHTML = 'Buy a mining barge for ' + miner_cost;
+    e2.innerHTML = 'Buy a mining barge for ' + mining_barge_cost;
 	var e3 = document.getElementById("total_mining_barges");
-	e3.innerHTML = "Mining barges: " + miners;
+	e3.innerHTML = "Mining Barges: " + mining_barge;
 	
     update_total_clicks();
 	update_cps();
@@ -91,7 +116,6 @@ document.getElementById("buy_multiplier").onclick =    function() {
    e.innerHTML = 'Multiplier: ' + multiplier * 2;
    multiplier++;
    document.getElementById("buy_multiplier").disabled = true;
-   //miners = miners * multiplier;
    
    update_cps();
    total_clicks -= 50;
@@ -103,7 +127,7 @@ document.getElementById("buy_multiplier").onclick =    function() {
 
 //updates text fields once per second
 setInterval(function () {
-    total_clicks += multiplier * miners;
+    total_clicks += multiplier * ((space_miner / 10) + mining_barge);
 
 	update_total_clicks();
 	update_cps();
