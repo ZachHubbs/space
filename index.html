@@ -30,7 +30,7 @@
 var total_clicks = 0; //increment this by one every click
 var manual_clicks = 1; //value of manually clicking the asteroid
 
-var multiplier = 1; // increases based on upgrades
+var barge_multiplier = 1; // increases based on upgrades
 var cps = 0; //the number of total clicks per second 
 var upgrades = "Upgrades: ";  //purchased upgrades
 
@@ -51,7 +51,7 @@ function update_total_clicks() {
 
 //update the amount of clicks per second
 function update_cps()  {
-	cps = ((space_miner / 10) + mining_barge) * multiplier;
+	cps = ((space_miner / 10) + (mining_barge * barge_multiplier));
 	var e = document.getElementById("clicks_per_second");
 	e.innerHTML = 'Clicks per second: ' + cps;
 	
@@ -66,7 +66,7 @@ function update_upgrades() 	{
 //add a click when the asteroid is manually clicked
 document.getElementById("click").onclick =    function() {  
 
-	total_clicks = total_clicks + (multiplier * manual_clicks);
+	total_clicks = total_clicks + manual_clicks;
     update_total_clicks(); //updates the text
 };
 
@@ -106,15 +106,15 @@ document.getElementById("buy_mining_barge").onclick =    function() {
 	update_cps();
 };
 
-//purchases the click multiplier, disabling the button
+//purchases the click barge_multiplier, disabling the button
 document.getElementById("buy_multiplier").onclick =    function() {  
 	if (total_clicks < 50) {
 		return alert('need more clicks.');
 	}	
 		
    var e = document.getElementById("current_multiplier");
-   e.innerHTML = 'Multiplier: ' + multiplier * 2;
-   multiplier++;
+   e.innerHTML = 'multiplier: ' + barge_multiplier * 2;
+   barge_multiplier++;
    document.getElementById("buy_multiplier").disabled = true;
    
    update_cps();
@@ -127,12 +127,12 @@ document.getElementById("buy_multiplier").onclick =    function() {
 
 //updates text fields once per second
 setInterval(function () {
-    total_clicks += multiplier * ((space_miner / 10) + mining_barge);
+    total_clicks += (((space_miner / 10) + (mining_barge * barge_multiplier))/10);
 
 	update_total_clicks();
 	update_cps();
     
-}, 1000); //once per second use the auto clickers
+}, 100); //once per second use the auto clickers
 </script>
 
 </body>
