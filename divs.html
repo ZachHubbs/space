@@ -51,11 +51,12 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 
 .sidebar1 {
-	float: left;
+
 	width: 27%;
 	min-height:300px;
 	background: #93A5C4;
 	padding: 10px 0;
+	float: left;
 }
 .content {
 	padding: 10px 0;
@@ -63,13 +64,16 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	min-height:300px;
 	background: #009;
 	float: left;
+	/*background-image:url('images/center_bg.png');
+	background-repeat:no-repeat;*/
 }
 .sidebar2 {
-	float: left;
+
 	width: 27%;
 	min-height:300px;
 	background: #93A5C4;
 	padding: 10px 0;
+	float: left;
 }
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
@@ -129,9 +133,12 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <img src="images/asteroid.png"/>
 </div>
   <div class="sidebar1">
+  <img src="images/left_bg.png" width="100%"/>
     <!-- end .sidebar1 --></div>
-  <div class="content"><!-- end .content --></div>
+  <div class="content">
+  <img src="images/center_bg.png" width="100%"/><!-- end .content --></div>
   <div class="sidebar2">
+  <img src="images/right_bg.png" width="100%"/>
     <!-- end .sidebar2 --></div>
   <!-- end .container --></div>
 </body>
