@@ -53,19 +53,21 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 .sidebar1 {
 	float: left;
 	width: 20%;
-	height:300px;
+	min-height:300px;
 	background: #93A5C4;
-	padding-bottom: 10px;
+	padding: 10px 0;
 }
 .content {
 	padding: 10px 0;
 	width: 60%;
+	min-height:300px;
 	background: #009;
 	float: left;
 }
 .sidebar2 {
 	float: left;
 	width: 20%;
+	min-height:300px;
 	background: #93A5C4;
 	padding: 10px 0;
 }
@@ -123,12 +125,10 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 
 <div class="container">
 
-<div style="height:500px;">
+<div style="height:600px; background-image:url('images/background.png');">
 
 </div>
   <div class="sidebar1">
-
-    <p>&nbsp;</p>
     <!-- end .sidebar1 --></div>
   <div class="content"><!-- end .content --></div>
   <div class="sidebar2">
