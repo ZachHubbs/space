@@ -49,11 +49,11 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	width: 27%;
 	min-height:300px;
 	background: #93A5C4;
-	padding: 10px 0;
+	padding: 0;
 	float: left;
 }
 .content {
-	padding: 10px 0;
+	padding: 0;
 	width: 46%;
 	min-height:300px;
 	background: #009;
@@ -66,7 +66,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	width: 27%;
 	min-height:300px;
 	background: #93A5C4;
-	padding: 10px 0;
+	padding: 0;
 	float: left;
 }
 .resource_bar{
