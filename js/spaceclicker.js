@@ -89,12 +89,12 @@ document.getElementById("buy_multiplier").onclick =    function() {
 		return alert('need more metal.');
 	}	
 		
-   var e = document.getElementById("current_multiplier");
-   e.innerHTML = 'multiplier: ' + barge_multiplier * 2;
+  // var e = document.getElementById("current_multiplier");
+  // e.innerHTML = 'multiplier: ' + barge_multiplier * 2;
    barge_multiplier++;
    document.getElementById("buy_multiplier").disabled = true;
    
-   update_cps();
+   //update_cps();
    total_metal -= 50;
    upgrades += "Titanium Drill Bit";
    update_total_metal();
