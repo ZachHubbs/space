@@ -1,4 +1,4 @@
-<script type="text/javascript">
+
 var total_metal = 0; //increment this by one every click
 var manual_clicks = 1; //value of manually clicking the asteroid
 
@@ -111,4 +111,3 @@ setInterval(function () {
     update_title();
 	
 }, 100); //once per second use the auto clickers
-</script>
