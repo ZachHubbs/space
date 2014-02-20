@@ -1,46 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
-
-<title>Space Miner</title>
-</head>
-
-<body>
-
-<table>
- <tr>
-  <td>
-	<a><img id="click" src="images/asteroid.png"></a>
-  </td>
- </tr>
- <tr>
-  <td align="center" cellpadding="0">
-	<div id="total_metal">Metal: 0</div>
-	<div id="metal_per_second">Metal per second: 0</div>
-  </td>
- </tr>
-</table>
-
-</br>
-<button id="buy_space_miner" title="Mines 0.1 metal per second">Hire a space miner for 15</button>
-</br>
-<button id="buy_mining_barge" title="Mines 1.0 metal per second">Buy a mining barge for 100</button>
-</br>
-<button id="buy_multiplier" title="Doubles the value of mining barges and manual metal">Titanium Drill Bit - 50</button>
-
-
-
-<div id="current_multiplier">Multiplier: 1</div>
-</br>
-<div id="total_space_miners">Space Miners: 0</div>
-<div id="total_mining_barges">Mining Barges: 0</div>
-<div id="bought_upgrades">Upgrades: </div>
-
-
-
-<script>
+<script type="text/javascript">
 var total_metal = 0; //increment this by one every click
 var manual_clicks = 1; //value of manually clicking the asteroid
 
@@ -64,7 +22,7 @@ function update_title() {
 
 //update the total number of metal
 function update_total_metal() {
-    var e = document.getElementById("total_metal");
+    var e = document.getElementById("metal_resource_bar");
     e.innerHTML = 'Metal: ' + Math.round(total_metal * 10)/10;
 }
 
@@ -83,7 +41,7 @@ function update_upgrades() 	{
 }
 
 //add a click when the asteroid is manually clicked
-document.getElementById("click").onclick =    function() {  
+document.getElementById("asteroid").onclick =    function() {  
 
 	total_metal = total_metal + manual_clicks;
     update_total_metal(); //updates the text
@@ -154,6 +112,3 @@ setInterval(function () {
 	
 }, 100); //once per second use the auto clickers
 </script>
-
-</body>
-</html>

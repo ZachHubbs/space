@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+
 <title>Untitled Document</title>
 <link rel="stylesheet" type="text/css" href="styles.css" />
 
@@ -13,9 +15,13 @@
 <div class="container">
 
 <div style="height:600px; background-image:url('images/background.jpg');">
-<img style="float:left; "src="images/asteroid.png"/>
+<img id="asteroid" style="float:left;"src="images/asteroid.png"/>
 <div class="resource_bar">
-  dsda
+<div class="metal_resource_bar" id="metal">Metal: 0</div>
+<div class="energy_resource_bar" id="energy">Energy: 0</div>
+<div class="pop_resource_bar" id="energy">Pop: 0</div>
+<div class="ls_resource_bar" id="energy">LS: 0</div>
+
 </div>
 </div>
   <div class="sidebar1">
@@ -27,5 +33,7 @@
   <img src="images/right_bg.png" width="100%"/>
     <!-- end .sidebar2 --></div>
   <!-- end .container --></div>
+
+  <script src="js/clicker.js"></script>
 </body>
 </html>
