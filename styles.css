@@ -73,24 +73,28 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	float:right;
 	display:block;
 	background-color:#CCC;
-	min-width:400px;
+	min-width:500px;
 	
 }
 .metal_resource_bar{
 	float:left;
 	padding:0 10px;
+	width:20%;
 }
 .energy_resource_bar{
 	float:left;
 	padding:0 10px;
+	width:20;
 }
 .pop_resource_bar{
 	float:left;
 	padding:0 10px;
+	width:20%;
 }
 .ls_resource_bar{
 	float:left;
 	padding:0 10px;
+	width:20%;
 }
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol { 
